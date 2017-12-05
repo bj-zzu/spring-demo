@@ -6,6 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Created by Administrator on 2017/9/10.
  */
@@ -31,5 +34,12 @@ public class HelloController {
     public String redirect() {
         logger.info("redirect");
         return "redirect:/";
+    }
+
+    @RequestMapping("/login")
+    public String login(String username, String password, HttpServletResponse response) {
+        response.addCookie(new Cookie("username", username));
+        response.addCookie(new Cookie("error", "password error"));
+        return "redirect:/userlogin.html";
     }
 }
