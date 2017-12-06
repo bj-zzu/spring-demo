@@ -18,6 +18,5 @@
     </bean>
 
     <!-- 对静态资源文件的访问 -->
-    <mvc:resources mapping="/static/**" location="/static" />
-    <mvc:resources mapping="/userlogin.html" location="/userlogin.html"/>
+    <!--<mvc:resources mapping="/static/**" location="/static" />-->
 </beans>

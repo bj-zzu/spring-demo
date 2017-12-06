@@ -1,8 +1,6 @@
 package cn.zzuzl.service.test;
 
-import cn.zzuzl.common.util.JsonUtil;
 import cn.zzuzl.domain.User;
-import cn.zzuzl.domain.vo.Result;
 import cn.zzuzl.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +26,8 @@ public class UserServiceTest {
         User user = new User();
         user.setUsername("bb");
         user.setPassword("bb");
-        Result result = userService.addUser(user);
-        logger.info(JsonUtil.toJson(result));
+        user.setName("bb");
+        logger.info("" + userService.addUser(user));
+        // DuplicateKeyException
     }
 }

@@ -1,14 +1,14 @@
 package cn.zzuzl.service;
 
-import cn.zzuzl.common.util.ResultUtil;
 import cn.zzuzl.dao.UserDao;
 import cn.zzuzl.domain.User;
-import cn.zzuzl.domain.vo.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/9/10.
@@ -19,15 +19,26 @@ public class UserService {
     @Resource
     private UserDao userDao;
 
-    public Result addUser(User user) {
-        Result result = null;
-        try {
-            userDao.addUser(user);
-            result = ResultUtil.successResult();
-        } catch (Exception e) {
-            logger.error("addUser,exception-{}", user, e);
-            result = ResultUtil.exceptionResult(e);
+    public boolean addUser(User user) {
+        return userDao.addUser(user) > 0;
+    }
+
+    public boolean updateUser(Long id, String name) {
+        return userDao.updateUser(id, name) == 1;
+    }
+
+    public List<User> selectUser(String username) {
+        if(!StringUtils.hasText(username)) {
+            username = null;
         }
-        return result;
+        return userDao.selectUser(username);
+    }
+
+    public User getById(Long id) {
+        return userDao.getById(id);
+    }
+
+    public boolean deleteUser(Long id) {
+        return userDao.deleteUser(id) == 1;
     }
 }
